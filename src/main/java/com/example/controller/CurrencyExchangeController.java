@@ -5,7 +5,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.websocket.server.PathParam;
 import java.util.Currency;
 
 /**
@@ -14,7 +13,7 @@ import java.util.Currency;
 @RestController
 public class CurrencyExchangeController {
 
-    @RequestMapping("/{nnumber}")
+    @RequestMapping("/{number}")
     public Long multiplyByTwo(@PathVariable Long number){
 
         return number*2;
@@ -26,7 +25,7 @@ public class CurrencyExchangeController {
 
         return value+currency;
     }
-    @RequestMapping("/currencyValue/{value}/{multiplier}")
+    @RequestMapping("/currencyValue/{value}/{multiplier}")//TODO: Add ability to type numbers with decimal point. {m:.+} is read as String
     public String valueOf(@PathVariable Long value,
                           @PathVariable Long multiplier,
                           @RequestParam("from") String from,
@@ -35,8 +34,9 @@ public class CurrencyExchangeController {
         try{
             Currency currencyFrom= Currency.getInstance(from);
             Currency currencyTo=Currency.getInstance(to);
-            return value+from+" = "+value*multiplier+to;
+            return value+" "+currencyFrom.toString()+" = "+value*multiplier+" "+currencyTo.toString();
         }catch (IllegalArgumentException e){
+            e.getMessage();//if needed
             throw new RuntimeException("Something went wrong");
         }
     }
