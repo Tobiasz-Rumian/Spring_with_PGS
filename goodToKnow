@@ -1,0 +1,12 @@
+The Release Process:
+
+release:clean
+release:prepare
+release:perform
+
+=================
+The Deployment Process (for SNAPSHOT)
+
+mvn clean deploy -D maven.test.skip=true
+
+=================
