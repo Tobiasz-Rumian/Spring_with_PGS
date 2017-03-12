@@ -4,7 +4,7 @@
 
 	<groupId>com.currencyExchange</groupId>
 	<artifactId>currencyExchange</artifactId>
-	<version>0.0.2-SNAPSHOT</version>
+	<version>0.0.2</version>
 	<packaging>jar</packaging>
 
 	<name>currency exchange</name>
@@ -38,7 +38,7 @@
         <connection>scm:git:https://github.com/Tobiasz-Rumian/Spring_with_PGS.git</connection>
         <url>http://github.com/Tobiasz-Rumian/Spring_with_PGS</url>
         <developerConnection>scm:git:https://github.com/Tobiasz-Rumian/Spring_with_PGS.git</developerConnection>
-      <tag>HEAD</tag>
+      <tag>v0.0.2</tag>
   </scm>
 
 	<dependencies>
