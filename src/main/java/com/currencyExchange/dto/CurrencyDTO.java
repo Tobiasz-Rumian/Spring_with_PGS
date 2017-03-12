@@ -1,7 +1,4 @@
-package com.example.dto;
-
-import jdk.nashorn.internal.objects.annotations.Getter;
-import jdk.nashorn.internal.objects.annotations.Setter;
+package com.currencyExchange.dto;
 
 import java.math.BigDecimal;
 
