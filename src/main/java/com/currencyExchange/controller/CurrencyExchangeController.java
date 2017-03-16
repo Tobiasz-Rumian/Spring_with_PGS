@@ -1,57 +1,57 @@
 package com.currencyExchange.controller;
 
-import com.currencyExchange.dto.CurrencyDTO;
-import org.springframework.web.bind.annotation.PathVariable;
+import com.currencyExchange.service.CurrencyExchangeService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.math.BigDecimal;
-import java.util.Currency;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.List;
 
 /**
- * Created by zekori on 07.03.17.
+ * Created by zekori on 14.03.17.
  */
-@RestController //With @RestController we don't need to add @ResponseBody to create a simple website.
+@RestController
+@RequestMapping("/api")
 public class CurrencyExchangeController {
 
-    @RequestMapping("/{number}")
-    public Long multiplyByTwo(@PathVariable Long number) {
+    @Autowired
+    private Collection<CurrencyExchangeService> exchangeServices;
+    @Autowired
+    private String bean;
 
-        return number * 2;
+    @RequestMapping("/list")
+    public List<String> allExchanges(){
+     List<String> results = new ArrayList<>();
+     exchangeServices.forEach((currencyExchangeService -> results.add(currencyExchangeService.getCurrency())));
+     results.add(bean);
+     return results;
     }
 
-    @RequestMapping("/currency/{value}")
-    public String addCurrencySignature(@PathVariable Long value,
-                                       @RequestParam("currency") String currency) {
-
-        return value + currency;
+    @RequestMapping("/list/status")
+    public ResponseEntity<List<String>> allResponseExchanges(){
+        List<String> results = new ArrayList<>();
+        exchangeServices.forEach((currencyExchangeService -> results.add(currencyExchangeService.getCurrency())));
+        return new ResponseEntity<List<String>>(results, HttpStatus.CREATED);
     }
 
-    @RequestMapping("/currencyValue/{value}/{multiplier}")
-    //TODO: Add ability to type numbers with decimal point. {m:.+} is read as String
-    public String valueOf(@PathVariable Long value,
-                          @PathVariable Long multiplier,
-                          @RequestParam("from") String from,
-                          @RequestParam("to") String to) {
-
-        try {
-            Currency currencyFrom = Currency.getInstance(from);
-            Currency currencyTo = Currency.getInstance(to);
-            return value + " " + currencyFrom.toString() + " = " + value * multiplier + " " + currencyTo.toString();
-        } catch (IllegalArgumentException e) {
-            e.getMessage();//if needed
-            throw new RuntimeException("Something went wrong");
-        }
-    }
-
-    @RequestMapping("/dto")
-    public CurrencyDTO returnDTO(){
-        return CurrencyDTO.
-                builder().
-                currency(Currency.getInstance("PLN")).
-                value(new BigDecimal(123.32)).
-                build();
+    @RequestMapping("/list/decorator")
+    public List<String> allResponseExchangesDecorator(HttpServletRequest request, HttpServletResponse response){
+        List<String> results = new ArrayList<>();
+        exchangeServices.forEach((currencyExchangeService -> results.add(currencyExchangeService.getCurrency())));
+        response.setStatus(401);
+        return results;
     }
 
 }
+
+
+/*
+Napisać serwis do wymiany walut. Kontroler 3 endpointy każdy używa innego podejścia (autowired, response entity, autowired z Response)
+ */
