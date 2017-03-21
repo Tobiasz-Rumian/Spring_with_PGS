@@ -1,12 +1,11 @@
 package com.currencyExchange.controller;
 
-import com.currencyExchange.dto.CurrencyDTO;
+
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.math.BigDecimal;
 import java.util.Currency;
 
 /**
@@ -45,17 +44,4 @@ public class TestCurrencyExchangeController {
             throw new RuntimeException("Something went wrong");
         }
     }
-
-    @RequestMapping("/dto")
-    public CurrencyDTO returnDTO(){
-        return CurrencyDTO.
-                builder().
-                currency(Currency.getInstance("PLN")).
-                value(new BigDecimal(123.32)).
-                build();
-    }
-
-
-
-
 }
