@@ -5,6 +5,5 @@ package com.currencyExchange.service;
  */
 
 public interface CurrencyExchangeService {
-
     String getCurrency();
 }
