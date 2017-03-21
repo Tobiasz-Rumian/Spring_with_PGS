@@ -12,49 +12,36 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 @JsonPropertyOrder({
-    "base",
-    "date",
-    "rates"
+    "GBP",
+    "USD"
 })
-public class CurrencyDTO {
+public class Rates {
 
-    @JsonProperty("base")
-    private String base;
-    @JsonProperty("date")
-    private String date;
-    @JsonProperty("rates")
-    private Rates rates;
+    @JsonProperty("GBP")
+    private Double gBP;
+    @JsonProperty("USD")
+    private Double uSD;
     @JsonIgnore
     private Map<String, Object> additionalProperties = new HashMap<String, Object>();
 
-    @JsonProperty("base")
-    public String getBase() {
-        return base;
+    @JsonProperty("GBP")
+    public Double getGBP() {
+        return gBP;
     }
 
-    @JsonProperty("base")
-    public void setBase(String base) {
-        this.base = base;
+    @JsonProperty("GBP")
+    public void setGBP(Double gBP) {
+        this.gBP = gBP;
     }
 
-    @JsonProperty("date")
-    public String getDate() {
-        return date;
+    @JsonProperty("USD")
+    public Double getUSD() {
+        return uSD;
     }
 
-    @JsonProperty("date")
-    public void setDate(String date) {
-        this.date = date;
-    }
-
-    @JsonProperty("rates")
-    public Rates getRates() {
-        return rates;
-    }
-
-    @JsonProperty("rates")
-    public void setRates(Rates rates) {
-        this.rates = rates;
+    @JsonProperty("USD")
+    public void setUSD(Double uSD) {
+        this.uSD = uSD;
     }
 
     @JsonAnyGetter

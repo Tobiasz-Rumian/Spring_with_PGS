@@ -18,7 +18,7 @@ import java.util.List;
  * Created by zekori on 14.03.17.
  */
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/currencyApi")
 public class CurrencyExchangeController {
 
     @Autowired
