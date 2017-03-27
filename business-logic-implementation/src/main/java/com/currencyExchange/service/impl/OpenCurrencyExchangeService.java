@@ -1,5 +1,6 @@
-package com.currencyExchange.service;
+package com.currencyExchange.service.impl;
 
+import com.currencyExchange.service.OpenExchangeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -14,7 +15,7 @@ import java.util.Map;
  * Created by Tobiasz Rumian on 21.03.2017.
  */
 @Service
-public class OpenCurrencyExchangeService implements OpenExchangeService{
+public class OpenCurrencyExchangeService implements OpenExchangeService {
     private String url="http://api.fixer.io/";
     private String latest="latest?";
     @Autowired
